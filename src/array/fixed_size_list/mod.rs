@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use crate::{
     bitmap::Bitmap,
     datatypes::{DataType, Field},
@@ -203,7 +205,7 @@ impl FixedSizeListArray {
 
     /// Returns a [`DataType`] consistent with [`FixedSizeListArray`].
     pub fn default_datatype(data_type: DataType, size: usize) -> DataType {
-        let field = Box::new(Field::new("item", data_type, true));
+        let field = Arc::new(Field::new("item", data_type, true));
         DataType::FixedSizeList(field, size)
     }
 }

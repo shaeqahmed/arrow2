@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use re_arrow2::array::*;
 use re_arrow2::datatypes::TimeUnit;
 use re_arrow2::temporal_conversions;
@@ -193,7 +195,7 @@ fn timestamp_to_negative_datetime() {
 
 #[test]
 fn tz_aware() {
-    let tz = "-02:00".to_string();
+    let tz = Arc::new("-02:00".to_string());
     let expected =
         "Timestamp(Nanosecond, Some(\"-02:00\"))[1996-12-19 16:39:57 -02:00, 1996-12-19 17:39:57 -02:00, None]";
     let fmt = "%Y-%m-%dT%H:%M:%S%.f%:z";
@@ -208,7 +210,7 @@ fn tz_aware() {
 
 #[test]
 fn tz_aware_no_timezone() {
-    let tz = "-02:00".to_string();
+    let tz = Arc::new("-02:00".to_string());
     let expected = "Timestamp(Nanosecond, Some(\"-02:00\"))[None, None, None]";
     let fmt = "%Y-%m-%dT%H:%M:%S%.f";
     let array = Utf8Array::<i32>::from_slice([

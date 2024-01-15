@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use re_arrow2::array::*;
 use re_arrow2::bitmap::Bitmap;
 use re_arrow2::compute::comparison::{self, boolean::*, primitive, utf8};
@@ -42,7 +44,7 @@ fn consistency() {
         Duration(TimeUnit::Millisecond),
         Duration(TimeUnit::Microsecond),
         Duration(TimeUnit::Nanosecond),
-        Dictionary(IntegerType::Int32, Box::new(LargeBinary), false),
+        Dictionary(IntegerType::Int32, Arc::new(LargeBinary), false),
     ];
 
     // array <> array
